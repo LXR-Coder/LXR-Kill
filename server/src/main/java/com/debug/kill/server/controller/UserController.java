@@ -8,7 +8,6 @@ import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +52,8 @@ public class UserController {
         String errorMsg="";
         try {
             if (!SecurityUtils.getSubject().isAuthenticated()){
-                String newPsd=new Md5Hash(password,env.getProperty("shiro.encrypt.password.salt")).toString();
-                UsernamePasswordToken token=new UsernamePasswordToken(userName,newPsd);
+//                String newPsd=new Md5Hash(password,env.getProperty("shiro.encrypt.password.salt")).toString();
+                UsernamePasswordToken token=new UsernamePasswordToken(userName,password);
                 SecurityUtils.getSubject().login(token);
             }
         }catch (UnknownAccountException e){

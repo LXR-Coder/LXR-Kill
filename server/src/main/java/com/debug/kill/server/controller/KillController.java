@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * 秒杀controller
@@ -55,7 +54,11 @@ public class KillController {
         if (result.hasErrors() || dto.getKillId()<=0){
             return new BaseResponse(StatusCode.InvalidParams);
         }
-        Integer userId=dto.getUserId();
+         Object uId = session.getAttribute("uid");
+        if(uId==null){
+            return new BaseResponse(StatusCode.Fail.getCode(),"未登录!");
+        }
+        Integer userId= (Integer)uId;
 
         BaseResponse response=new BaseResponse(StatusCode.Success);
         try {

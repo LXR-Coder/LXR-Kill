@@ -46,17 +46,19 @@
 <%--<script src="${ctx}/static/script/kill.js"></script>--%>
 <link rel="stylesheet" href="${ctx}/static/css/detail.css" type="text/css">
 <script type="text/javascript">
-    function executeKill() {
+    function executeKill() {debugger
             $.ajax({
                 type: "POST",
                 url: "${ctx}/kill/execute",
                 contentType: "application/json;charset=utf-8",
                 data: JSON.stringify(getJsonData()),
                 dataType: "json",
-                success: function(res){
-                    if (res.code==0) {
+                success: function(res){debugger
+                    if (res.code==0) {debugger
+                        alert(res.msg);
                         window.location.href="${ctx}/kill/execute/success"
-                    }else{
+                    }else{debugger
+                        alert(res.msg);
                         window.location.href="${ctx}/kill/execute/fail"
                     }
                 },
